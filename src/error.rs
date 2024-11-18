@@ -3,13 +3,17 @@ use std::fmt;
 #[derive(Debug)]
 pub enum LoxErrorType {
     UnexpectedCharacter(char),
+    UnterminatedString,
 }
 
 impl fmt::Display for LoxErrorType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             LoxErrorType::UnexpectedCharacter(c) => {
-                write!(f, "Unexpected character `{}`", c,)
+                write!(f, "Unexpected character `{}`.", c,)
+            }
+            LoxErrorType::UnterminatedString => {
+                write!(f, "String was not terminated.")
             }
         }
     }
