@@ -1,4 +1,5 @@
 use anyhow::{bail, Result};
+use scanner::TokenKind;
 use std::env;
 use std::fs;
 use std::path::PathBuf;
@@ -23,7 +24,12 @@ fn main() -> Result<()> {
                 }
 
                 let token = token.unwrap();
-                println!("{}", token);
+                match token.kind() {
+                    TokenKind::WhiteSpace | TokenKind::NewLine => {}
+                    _ => {
+                        println!("{}", token);
+                    }
+                }
             }
             Ok(())
         }
